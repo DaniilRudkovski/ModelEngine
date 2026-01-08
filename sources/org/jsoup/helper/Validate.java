@@ -1,0 +1,118 @@
+/*
+ * Decompiled with CFR 0.152.
+ * 
+ * Could not load the following classes:
+ *  org.jspecify.annotations.Nullable
+ */
+package org.jsoup.helper;
+
+import org.jsoup.helper.ValidationException;
+import org.jspecify.annotations.Nullable;
+
+public final class Validate {
+    private Validate() {
+    }
+
+    public static void notNull(@Nullable Object obj) {
+        if (obj == null) {
+            throw new ValidationException("Object must not be null");
+        }
+    }
+
+    public static void notNullParam(@Nullable Object obj, String param) {
+        if (obj == null) {
+            throw new ValidationException(String.format("The parameter '%s' must not be null.", param));
+        }
+    }
+
+    public static void notNull(@Nullable Object obj, String msg) {
+        if (obj == null) {
+            throw new ValidationException(msg);
+        }
+    }
+
+    public static Object ensureNotNull(@Nullable Object obj) {
+        if (obj == null) {
+            throw new ValidationException("Object must not be null");
+        }
+        return obj;
+    }
+
+    public static Object ensureNotNull(@Nullable Object obj, String msg, Object ... args) {
+        if (obj == null) {
+            throw new ValidationException(String.format(msg, args));
+        }
+        return obj;
+    }
+
+    public static void isTrue(boolean val) {
+        if (!val) {
+            throw new ValidationException("Must be true");
+        }
+    }
+
+    public static void isTrue(boolean val, String msg) {
+        if (!val) {
+            throw new ValidationException(msg);
+        }
+    }
+
+    public static void isFalse(boolean val) {
+        if (val) {
+            throw new ValidationException("Must be false");
+        }
+    }
+
+    public static void isFalse(boolean val, String msg) {
+        if (val) {
+            throw new ValidationException(msg);
+        }
+    }
+
+    public static void noNullElements(Object[] objects) {
+        Validate.noNullElements(objects, "Array must not contain any null objects");
+    }
+
+    public static void noNullElements(Object[] objects, String msg) {
+        for (Object obj : objects) {
+            if (obj != null) continue;
+            throw new ValidationException(msg);
+        }
+    }
+
+    public static void notEmpty(@Nullable String string) {
+        if (string == null || string.length() == 0) {
+            throw new ValidationException("String must not be empty");
+        }
+    }
+
+    public static void notEmptyParam(@Nullable String string, String param) {
+        if (string == null || string.length() == 0) {
+            throw new ValidationException(String.format("The '%s' parameter must not be empty.", param));
+        }
+    }
+
+    public static void notEmpty(@Nullable String string, String msg) {
+        if (string == null || string.length() == 0) {
+            throw new ValidationException(msg);
+        }
+    }
+
+    public static void wtf(String msg) {
+        throw new IllegalStateException(msg);
+    }
+
+    public static void fail(String msg) {
+        throw new ValidationException(msg);
+    }
+
+    static boolean assertFail(String msg) {
+        Validate.fail(msg);
+        return false;
+    }
+
+    public static void fail(String msg, Object ... args) {
+        throw new ValidationException(String.format(msg, args));
+    }
+}
+

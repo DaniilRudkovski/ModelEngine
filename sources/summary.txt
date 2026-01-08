@@ -1,0 +1,10 @@
+Summary for modelengine.jar
+Decompiled with CFR 0.152
+
+
+com.ticxo.modelengine.core.generator.ModelGeneratorImpl
+----------------------------
+
+importModelsInternal(boolean )
+  Unable to fully structure code
+  Could not resolve type clashes
